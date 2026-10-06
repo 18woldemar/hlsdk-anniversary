@@ -245,6 +245,7 @@ DECLARE_COMMAND( m_Ammo, Slot10 )
 DECLARE_COMMAND( m_Ammo, Close )
 DECLARE_COMMAND( m_Ammo, NextWeapon )
 DECLARE_COMMAND( m_Ammo, PrevWeapon )
+DECLARE_COMMAND( m_Ammo, SelectNow )
 
 // width of ammo fonts
 #define AMMO_SMALL_WIDTH 10
@@ -277,6 +278,7 @@ int CHudAmmo::Init( void )
 	HOOK_COMMAND( "cancelselect", Close );
 	HOOK_COMMAND( "invnext", NextWeapon );
 	HOOK_COMMAND( "invprev", PrevWeapon );
+	HOOK_COMMAND( "invselect", SelectNow );
 
 	Reset();
 
@@ -293,6 +295,7 @@ int CHudAmmo::Init( void )
 
 void CHudAmmo::Reset( void )
 {
+	m_fSelectNow = false;
 	m_fFade = 0;
 	m_iFlags |= HUD_ACTIVE; //!!!
 
@@ -367,11 +370,14 @@ void CHudAmmo::Think( void )
 		}
 	}
 
+	const bool selectNow = m_fSelectNow;
+	m_fSelectNow = false;
+
 	if( !gpActiveSel )
 		return;
 
 	// has the player selected one?
-	if( gHUD.m_iKeyBits & IN_ATTACK )
+	if(( gHUD.m_iKeyBits & IN_ATTACK ) || selectNow )
 	{
 		if( gpActiveSel != (WEAPON *) 1 )
 		{
@@ -839,6 +845,13 @@ void CHudAmmo::UserCmd_PrevWeapon( void )
 	}
 
 	gpActiveSel = NULL;
+}
+
+// takes the weapon highlighted in the list as fire would, without firing: the pad's bumpers bind
+// "invnext; invselect", as the 25th update's Steam Input layout scrolls the wheel and clicks
+void CHudAmmo::UserCmd_SelectNow( void )
+{
+	m_fSelectNow = true;
 }
 
 //-------------------------------------------------------------------------

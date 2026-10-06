@@ -130,8 +130,10 @@ public:
 	void _cdecl UserCmd_Close( void );
 	void _cdecl UserCmd_NextWeapon( void );
 	void _cdecl UserCmd_PrevWeapon( void );
+	void _cdecl UserCmd_SelectNow( void );
 
 private:
+	bool m_fSelectNow; // invselect ran this frame
 	float m_fFade;
 	RGBA  m_rgba;
 	WEAPON *m_pWeapon;

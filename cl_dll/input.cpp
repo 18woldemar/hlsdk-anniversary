@@ -593,6 +593,16 @@ void IN_DuckUp( void )
 	KeyUp( &in_duck );
 }
 
+// crouch until pressed again (the pad's left stick click in the 25th update's layout);
+// ending it also ends a held +duck, as the console's -duck does
+void IN_DuckToggle( void )
+{
+	if( in_duck.state & 1 )
+		KeyUp( &in_duck );
+	else
+		IN_DuckDown();
+}
+
 void IN_ReloadDown( void )
 {
 	KeyDown( &in_reload );
@@ -1097,6 +1107,7 @@ void InitInput( void )
 	gEngfuncs.pfnAddCommand( "-jlook", IN_JLookUp );
 	gEngfuncs.pfnAddCommand( "+duck", IN_DuckDown );
 	gEngfuncs.pfnAddCommand( "-duck", IN_DuckUp );
+	gEngfuncs.pfnAddCommand( "toggle_duck", IN_DuckToggle );
 	gEngfuncs.pfnAddCommand( "+reload", IN_ReloadDown );
 	gEngfuncs.pfnAddCommand( "-reload", IN_ReloadUp );
 	gEngfuncs.pfnAddCommand( "+alt1", IN_Alt1Down );
