@@ -1,3 +1,10 @@
+> [!NOTE]
+> **This is the game code of [xash3d-anniversary](https://github.com/18woldemar/xash3d-anniversary)**, a fork of
+> FWGS's [hlsdk-portable](https://github.com/FWGS/hlsdk-portable) that keeps only its `master` (Half-Life). It
+> adds the `invselect` and `toggle_duck` commands of Valve's 25th anniversary pad layout. For the expansions and
+> mods, use upstream's branches. Report bugs in
+> [xash3d-anniversary](https://github.com/18woldemar/xash3d-anniversary/issues). Upstream's README follows.
+
 # Half-Life SDK for GoldSource and Xash3D [![Build Status](https://github.com/FWGS/hlsdk-portable/actions/workflows/build.yml/badge.svg?branch=master)](https://github.com/FWGS/hlsdk-portable/actions/workflows/build.yml) [![Windows Build Status](https://ci.appveyor.com/api/projects/status/github/FWGS/hlsdk-portable?svg=true)](https://ci.appveyor.com/project/a1batross/hlsdk-portable)
 
 Half-Life SDK for GoldSource & Xash3D with some bugfixes.
